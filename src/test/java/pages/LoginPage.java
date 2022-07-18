@@ -1,17 +1,14 @@
 package pages;
 
 import base.BaseTest;
-import utils.ConfigReader;
-import utils.ElementReader;
 
-public class LoginPage extends BaseTest {
-    ElementReader elementReader = new ElementReader("element");
-    ConfigReader configReader = new ConfigReader("config");
+public class LoginPage {
+    BaseTest baseTest = new BaseTest();
 
-public void login(){
-    getDriver().findElement(elementReader.getElementValue("login_email_input")).sendKeys(configReader.getProperty("user_email"));
-    getDriver().findElement(elementReader.getElementValue("login_email_button")).click();
-    getDriver().findElement(elementReader.getElementValue("login_password_input")).sendKeys(configReader.getProperty("user_password"));
-    getDriver().findElement(elementReader.getElementValue("login_password_button")).click();
-}
+    public void login() {
+        baseTest.sendKeysToElement("login_email_input", "user_email");
+        baseTest.clickToElement("login_email_button");
+        baseTest.sendKeysToElement("login_password_input", "user_password");
+        baseTest.clickToElement("login_password_button");
+    }
 }

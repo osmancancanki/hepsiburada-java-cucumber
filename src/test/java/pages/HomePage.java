@@ -1,22 +1,26 @@
 package pages;
 
 import base.BaseTest;
-import utils.ElementReader;
 
-public class HomePage extends BaseTest {
-    ElementReader elementReader = new ElementReader("element");
+public class HomePage {
+    BaseTest baseTest = new BaseTest();
 
     public void navigateToHomePage(){
-        baseUrl();
+        baseTest.baseUrl("base_url");
     }
+
     public void navigateToLogIn() {
-        getDriver().findElement(elementReader.getElementValue("home_login_dropdown")).click();
-        getDriver().findElement(elementReader.getElementValue("home_login_item")).click();
+        baseTest.clickToElement("home_login_dropdown");
+        baseTest.clickToElement("home_login_item");
     }
 
     public void searchForProduct(String product) {
-        getDriver().findElement(elementReader.getElementValue("home_search_input")).click();
-        getDriver().findElement(elementReader.getElementValue("home_search_input")).sendKeys(product);
-        getDriver().findElement(elementReader.getElementValue("home_search_button")).click();
+        baseTest.clickToElement("home_search_input");
+        baseTest.sendKeysToElement("home_search_input",product);
+        baseTest.clickToElement("home_search_button");
+    }
+
+    public void checkForLogin() {
+        baseTest.compareTextWithExpected("home_logged_in_dropdown","user_name");
     }
 }
