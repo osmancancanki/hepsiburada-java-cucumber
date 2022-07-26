@@ -1,24 +1,25 @@
 package base;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.WebDriver;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.ConfigReader;
+import utils.ElementReader;
 
-import java.util.ArrayList;
+import java.io.File;
 import java.util.concurrent.TimeUnit;
 
 public class BaseTest {
-    ConfigReader configReader = new ConfigReader("config");
-
-    private static WebDriver driver;
-
-    public static WebDriver getDriver() {
-        return driver;
-    }
+    public static WebDriverWait wait;
+    public static WebDriver driver;
+    public String expectedText;
+    protected ConfigReader configReader = new ConfigReader("config");
+    protected ElementReader elementReader = new ElementReader("element");
 
     public void initializeDriver() {
 
@@ -46,12 +47,12 @@ public class BaseTest {
         }
     }
 
-    public void baseUrl() {
-        driver.get(configReader.getProperty("base_url"));
-    }
-
-    public void nextTab() {
-        ArrayList<String> tabs2 = new ArrayList<> (driver.getWindowHandles());
-        driver.switchTo().window(tabs2.get(1));
+    public void testFailed() {
+        File screenshotFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        try {
+            FileUtils.copyFile(screenshotFile, new File("target/" + System.currentTimeMillis() + ".png"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

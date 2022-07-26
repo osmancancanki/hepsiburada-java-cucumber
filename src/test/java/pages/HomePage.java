@@ -1,22 +1,23 @@
 package pages;
 
-import base.BaseTest;
-import utils.ElementReader;
+public class HomePage extends BasePage{
 
-public class HomePage extends BaseTest {
-    ElementReader elementReader = new ElementReader("element");
-
-    public void navigateToHomePage(){
-        baseUrl();
+    public void navigateToHomePage() {
+        navigateToUrl("base_url");
     }
+
     public void navigateToLogIn() {
-        getDriver().findElement(elementReader.getElementValue("home_login_dropdown")).click();
-        getDriver().findElement(elementReader.getElementValue("home_login_item")).click();
+        clickToElement("home_login_dropdown");
+        clickToElement("home_login_item");
     }
 
     public void searchForProduct(String product) {
-        getDriver().findElement(elementReader.getElementValue("home_search_input")).click();
-        getDriver().findElement(elementReader.getElementValue("home_search_input")).sendKeys(product);
-        getDriver().findElement(elementReader.getElementValue("home_search_button")).click();
+        clickToElement("home_search_input");
+        sendKeysToElement("home_search_input", product);
+        clickToElement("home_search_button");
+    }
+
+    public void checkForLogin() {
+        elementIsDisplayed("home_logged_in_dropdown");
     }
 }
