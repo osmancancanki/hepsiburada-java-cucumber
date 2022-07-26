@@ -1,21 +1,19 @@
 package pages;
 
-import base.BaseTest;
-
-public class ProductPage {
-    BaseTest baseTest = new BaseTest();
+public class ProductPage extends BasePage {
 
     public void chooseProduct() {
-        baseTest.clickToElement("product_cart");
-        baseTest.nextTab();
+        getTextFromElement("product_cart");
+        clickToElement("product_cart");
+        nextTab();
     }
 
     public void addProducts() {
-        baseTest.clickToElement("product_first_add_button");
-        baseTest.waitForSecond(1000);
-        baseTest.clickToElement("product_close_modal_icon");
-        baseTest.clickToElement("product_second_add_button");
-        baseTest.waitForSecond(1000);
-        baseTest.clickToElement("product_shopping_cart_button");
+        clickToElement("product_first_add_button");
+        waitForSecond(1000);
+        clickToElement("product_close_modal_icon");
+        clickToElement("product_second_add_button");
+        waitForSecond(1000);
+        clickToElement("product_shopping_cart_button");
     }
 }

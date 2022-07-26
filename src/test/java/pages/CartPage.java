@@ -2,11 +2,12 @@ package pages;
 
 import base.BaseTest;
 
-public class CartPage {
-    BaseTest baseTest= new BaseTest();
+public class CartPage extends BasePage {
 
     public void checkForProducts() {
-        baseTest.compareTextWithExpected("cart_first_product_item", "product_name");
-        baseTest.compareTextWithExpected("cart_second_product_item", "product_name");
+        expectedText = getTextFromElement("cart_first_product_item");
+        compareTextWithExpected("cart_first_product_item");
+        expectedText = getTextFromElement("cart_first_product_item");
+        compareTextWithExpected("cart_second_product_item");
     }
 }
