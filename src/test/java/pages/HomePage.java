@@ -1,26 +1,23 @@
 package pages;
 
-import base.BaseTest;
+public class HomePage extends BasePage{
 
-public class HomePage {
-    BaseTest baseTest = new BaseTest();
-
-    public void navigateToHomePage(){
-        baseTest.baseUrl("base_url");
+    public void navigateToHomePage() {
+        navigateToUrl("base_url");
     }
 
     public void navigateToLogIn() {
-        baseTest.clickToElement("home_login_dropdown");
-        baseTest.clickToElement("home_login_item");
+        clickToElement("home_login_dropdown");
+        clickToElement("home_login_item");
     }
 
     public void searchForProduct(String product) {
-        baseTest.clickToElement("home_search_input");
-        baseTest.sendKeysToElement("home_search_input",product);
-        baseTest.clickToElement("home_search_button");
+        clickToElement("home_search_input");
+        sendKeysToElement("home_search_input", product);
+        clickToElement("home_search_button");
     }
 
     public void checkForLogin() {
-        baseTest.compareTextWithExpected("home_logged_in_dropdown","user_name");
+        elementIsDisplayed("home_logged_in_dropdown");
     }
 }
